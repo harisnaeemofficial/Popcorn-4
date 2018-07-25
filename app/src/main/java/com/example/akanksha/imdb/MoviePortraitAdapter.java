@@ -25,7 +25,6 @@ public class MoviePortraitAdapter extends RecyclerView.Adapter<MoviePortraitHold
 
     public MoviePortraitAdapter(@NonNull Context context, ArrayList<MoviePortrait> items,MovieItemClickListener listener) {
 
-        inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context=context;
         this.items = items;
         this.listener=listener;
@@ -37,7 +36,7 @@ public class MoviePortraitAdapter extends RecyclerView.Adapter<MoviePortraitHold
     public MoviePortraitHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View output= inflater.inflate(R.layout.vertical_movie_row,viewGroup,false);
+        View output= inflater.inflate(R.layout.vertical_movie_row,null,false);
 
         return new MoviePortraitHolder(output);
     }
@@ -49,9 +48,9 @@ public class MoviePortraitAdapter extends RecyclerView.Adapter<MoviePortraitHold
 
         moviePortraitHolder.rating.setText(movie.getVoteAverage().toString());
         moviePortraitHolder.star.setBackground(context.getResources().getDrawable(R.drawable.ic_star_yellow_600_24dp));
-        moviePortraitHolder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_border_white_24dp));
+        moviePortraitHolder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
 
-        String url = movie.getPosterPath();
+        String url = "https://image.tmdb.org/t/p/w500/" + movie.getPosterPath();
 
         Picasso.get().load(url).into(moviePortraitHolder.poster);
 

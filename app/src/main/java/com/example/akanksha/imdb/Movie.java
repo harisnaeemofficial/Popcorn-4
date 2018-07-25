@@ -11,14 +11,6 @@ import java.util.List;
 public class Movie {
 
     @Expose
-    private ArrayList<MoviePortrait> results;
-
-    public ArrayList<MoviePortrait> getResults() {
-        return results;
-    }
-
-    public void setResults(ArrayList<MoviePortrait> results) {
-        this.results = results;
-    }
+     ArrayList<MoviePortrait> results;
 
 }

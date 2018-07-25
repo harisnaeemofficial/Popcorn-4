@@ -42,7 +42,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_favorite_border_white_24dp"
+            android:background="@drawable/ic_favorite_border_black_24dp"
             android:onClick="favorite"
 
             />

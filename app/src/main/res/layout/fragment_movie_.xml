@@ -8,11 +8,21 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
 
+<LinearLayout
+
+    android:id="@+id/linear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,29 +39,27 @@
                 android:layout_marginLeft="10dp"
                 />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:text="View All"
-                android:textSize="18dp"
-                />
+           <TextView
+
+               android:id="@+id/viewpopular"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="end"
+               android:text="View All"
+               android:textStyle="bold"
+
+               />
 
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleview1"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             />
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,29 +77,28 @@
                 android:layout_marginLeft="10dp"
                 />
 
-            <Button
-                android:layout_width="0dp"
+            <TextView
+
+                android:id="@+id/viewnowplaying"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/white"
+                android:layout_gravity="end"
                 android:text="View All"
-                android:textSize="18dp"
+                android:textStyle="bold"
+
                 />
 
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleview2"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             />
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,26 +116,66 @@
                 android:layout_marginLeft="10dp"
                 />
 
-            <Button
-                android:layout_width="0dp"
+            <TextView
+
+                android:id="@+id/viewcomingsoon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/white"
+                android:layout_gravity="end"
                 android:text="View All"
-                android:textSize="18dp"
+                android:textStyle="bold"
+
                 />
 
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleview3"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             />
 
-    </LinearLayout>
 
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Top Rated"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <TextView
+
+                android:id="@+id/viewtoprated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="View All"
+                android:textStyle="bold"
+
+                />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleview4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+
+
+</LinearLayout>
 
 
 </LinearLayout>
