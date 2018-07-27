@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -30,6 +32,17 @@ public class ViewActivity extends AppCompatActivity {
     MoviePortraitAdapter adapter;
     String cat;
     String title;
+    int totalpages;
+
+    private  static final int PAGE_START = 1;
+    private  boolean isLoading = false;
+    private  boolean isLastPage= false;
+    private  int currentPage = PAGE_START;
+    private  static int flag;
+
+    int currentItems;
+    int scrolledItems;
+    int totalItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +79,39 @@ public class ViewActivity extends AppCompatActivity {
 
         recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
-        GridLayoutManager layoutManager1 = new GridLayoutManager(this,3);
+        final GridLayoutManager layoutManager1 = new GridLayoutManager(this,3);
         recyclerView.setLayoutManager(layoutManager1);
+
+
+       // final ProgressBar progressBar= new ProgressBar(this);
+        //recyclerView.addFooterView(progressBar,null,false);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView view, int dx, int dy) {
+
+                super.onScrolled(view,dx,dy);
+
+                currentItems = layoutManager1.getChildCount();
+                totalItems = layoutManager1.getItemCount();
+                scrolledItems = layoutManager1.findFirstVisibleItemPosition();
+
+
+                if( currentPage < totalpages && !isLoading &&  currentItems + scrolledItems == totalItems){
+
+                    currentPage+=1;
+                    see(cat,movies,adapter);
+
+                }
+
+
+            }
+        });
 
        // Toast.makeText(getContext(),"afterSet", Toast.LENGTH_LONG).show();
         Log.d("Fragment","afterset");
@@ -78,6 +122,9 @@ public class ViewActivity extends AppCompatActivity {
 
     void see(String cat,final ArrayList<MoviePortrait> list,final MoviePortraitAdapter adapter)
     {
+
+        isLoading=true;
+
         Log.d("Fragment","seefunc");
 
         Retrofit.Builder builder = new Retrofit.Builder()
@@ -88,7 +135,7 @@ public class ViewActivity extends AppCompatActivity {
 
         MovieSevice service = retrofit.create(MovieSevice.class);
 
-        Call<Movie> call = service.getDetails(cat,"7e00b48b59b417dfc865afa6de61f2aa",1);
+        Call<Movie> call = service.getDetails(cat,"7e00b48b59b417dfc865afa6de61f2aa",currentPage);
 
         call.enqueue(new Callback<Movie>() {
             @Override
@@ -96,9 +143,12 @@ public class ViewActivity extends AppCompatActivity {
 
                 Movie movie= response.body();
                 ArrayList<MoviePortrait> movies1 = movie.results;
-                //ArrayList<Album> courses = a.getData().courses;
 
-                list.clear();
+                totalpages = movie.total_pages;
+
+                //list.clear();
+
+                if (movie != null) {
                 for(int i = 0;i<movies1.size();i++){
 
                     list.add(movies1.get(i));
@@ -107,6 +157,15 @@ public class ViewActivity extends AppCompatActivity {
                 }
 
                 adapter.notifyDataSetChanged();
+
+
+                isLoading = false;
+
+            } else {
+
+                isLastPage = true;
+            }
+
 
                 Log.d("Fragment","sucess");
                 //progressBar.setVisibility(View.GONE);

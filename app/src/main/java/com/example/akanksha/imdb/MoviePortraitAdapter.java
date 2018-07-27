@@ -1,5 +1,6 @@
 package com.example.akanksha.imdb;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,12 +17,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static java.sql.Types.NULL;
+
 public class MoviePortraitAdapter extends RecyclerView.Adapter<MoviePortraitHolder> {
 
     LayoutInflater inflater;
     ArrayList<MoviePortrait> items;
     MovieItemClickListener listener;
     Context context;
+    FavoriteDao favoriteDao;
 
     public MoviePortraitAdapter(@NonNull Context context, ArrayList<MoviePortrait> items,MovieItemClickListener listener) {
 
@@ -44,11 +48,21 @@ public class MoviePortraitAdapter extends RecyclerView.Adapter<MoviePortraitHold
     @Override
     public void onBindViewHolder(@NonNull final MoviePortraitHolder moviePortraitHolder, int i) {
 
+        FavoriteDatabase database = Room.databaseBuilder(context,FavoriteDatabase.class,"expenses_db").allowMainThreadQueries().build();
+        favoriteDao = database.getFavDao();
+
         final MoviePortrait movie = items.get(i);
 
         moviePortraitHolder.rating.setText(movie.getVoteAverage().toString());
         moviePortraitHolder.star.setBackground(context.getResources().getDrawable(R.drawable.ic_star_yellow_600_24dp));
-        moviePortraitHolder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
+        int mov = favoriteDao.getmovid(movie.getPosterPath());
+
+        if(mov == NULL) {
+            moviePortraitHolder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
+        }
+
+        else
+            moviePortraitHolder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
 
         String url = "https://image.tmdb.org/t/p/w500/" + movie.getPosterPath();
 
@@ -59,10 +73,17 @@ public class MoviePortraitAdapter extends RecyclerView.Adapter<MoviePortraitHold
             @Override
             public void onClick(View view) {
 
-                listener.favButtonClicked(movie,moviePortraitHolder.getAdapterPosition());
+                //listener.favButtonClicked(movie,moviePortraitHolder.getAdapterPosition());
+                FavoriteEntity fmovie= new FavoriteEntity(movie.getId(),movie.getVoteAverage(),movie.getPosterPath());
+                favoriteDao.addFav(fmovie);
+
+                moviePortraitHolder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                moviePortraitHolder.favorite.setEnabled(false);
+
 
             }
         });
+
 
 
     }

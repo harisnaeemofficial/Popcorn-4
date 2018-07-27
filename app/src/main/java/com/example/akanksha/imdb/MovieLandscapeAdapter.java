@@ -1,5 +1,6 @@
 package com.example.akanksha.imdb;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static java.sql.Types.NULL;
+
 
 public class MovieLandscapeAdapter extends RecyclerView.Adapter<MovieLandscapeHolder>{
 
@@ -19,6 +22,7 @@ public class MovieLandscapeAdapter extends RecyclerView.Adapter<MovieLandscapeHo
     ArrayList<MoviePortrait> items;
     MovieItemClickListener listener;
     Context context;
+    FavoriteDao favoriteDao;
 
     public MovieLandscapeAdapter(Context context, ArrayList<MoviePortrait> items, MovieItemClickListener listener) {
 
@@ -44,21 +48,36 @@ public class MovieLandscapeAdapter extends RecyclerView.Adapter<MovieLandscapeHo
 
         final MoviePortrait movie = items.get(position);
 
+        FavoriteDatabase database = Room.databaseBuilder(context,FavoriteDatabase.class,"expenses_db").allowMainThreadQueries().build();
+        favoriteDao = database.getFavDao();
+
         holder.rating.setText(movie.getVoteAverage().toString());
         holder.star.setBackground(context.getResources().getDrawable(R.drawable.ic_star_yellow_600_24dp));
-        holder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
+        int mov = favoriteDao.getmovid(movie.getPosterPath());
+
+        if(mov == NULL) {
+            holder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
+        }
+
+        else
+           holder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+
         holder.title.setText(movie.getTitle());
 
-        String url = "https://image.tmdb.org/t/p/w1280/" + movie.getBackdrop_path();
+        String url = "https://image.tmdb.org/t/p/w780/" + movie.getBackdrop_path();
 
         Picasso.get().load(url).into(holder.poster);
-
-
+        
        holder.favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                listener.favButtonClicked(movie,holder.getAdapterPosition());
+                //listener.favButtonClicked(movie,holder.getAdapterPosition());
+                FavoriteEntity fmovie= new FavoriteEntity(movie.getId(),movie.getVoteAverage(),movie.getPosterPath());
+                favoriteDao.addFav(fmovie);
+
+               holder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+               holder.favorite.setEnabled(false);
 
             }
         });

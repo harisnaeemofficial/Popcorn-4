@@ -13,4 +13,6 @@ public class Movie {
     @Expose
      ArrayList<MoviePortrait> results;
 
+     int total_pages;
+
 }

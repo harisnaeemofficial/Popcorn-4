@@ -107,6 +107,13 @@ public class Nav_Activity extends AppCompatActivity
 
         } else if (id == R.id.favorites) {
 
+
+            Intent intent = new Intent(this,FavoriteActivity.class);
+
+            //intent.putExtras(bundle);
+            startActivity(intent);
+
+
         } else if (id == R.id.share) {
 
         } else if (id == R.id.about) {

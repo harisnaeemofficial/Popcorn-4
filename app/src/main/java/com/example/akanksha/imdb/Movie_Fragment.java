@@ -1,6 +1,7 @@
 package com.example.akanksha.imdb;
 
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -60,6 +61,9 @@ public class Movie_Fragment extends Fragment implements TextView.OnClickListener
     ProgressBar progressBar;
     LinearLayout linearLayout;
 
+    FavoriteDao favoriteDao;
+    List<FavoriteEntity> favmovies = new ArrayList<>();
+
     public Movie_Fragment() {
         // Required empty public constructor
     }
@@ -94,14 +98,24 @@ public class Movie_Fragment extends Fragment implements TextView.OnClickListener
         textView4.setOnClickListener(this);
 
 
+       /* FavoriteDatabase database = Room.databaseBuilder(getContext(),FavoriteDatabase.class,"expenses_db").allowMainThreadQueries().build();
+        favoriteDao = database.getFavDao();
+        favmovies = favoriteDao.getMovies();
+*/
+
+
         recyclerView1= (RecyclerView) output.findViewById(R.id.recycleview1);
 
         adapter1 = new MovieLandscapeAdapter(getContext(), movies, new MovieItemClickListener() {
             @Override
             public void favButtonClicked(MoviePortrait item, int position) {
 
-                //kh;
 
+               /* FavoriteEntity movie= new FavoriteEntity();
+                favoriteDao.addFav(movie);
+
+                favmovies.add(movie);
+*/
             }
 
 
@@ -179,6 +193,7 @@ public class Movie_Fragment extends Fragment implements TextView.OnClickListener
         Log.d("Fragment","setr2");
 
         seelandscape("upcoming",movies3,adapter3);
+
 
         recyclerView4= (RecyclerView) output.findViewById(R.id.recycleview4);
 
