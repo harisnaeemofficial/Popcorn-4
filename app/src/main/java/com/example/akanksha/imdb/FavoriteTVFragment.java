@@ -21,18 +21,17 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteMovieFragment extends Fragment {
-
+public class FavoriteTVFragment extends Fragment {
 
     ProgressBar progressBar;
     RecyclerView recyclerView;
 
     FavoriteMovieAdapter adapter;
     FavoriteDao favoriteDao;
-    List<FavoriteEntity> favmovies = new ArrayList<>();
+    List<FavoriteEntity> favshows = new ArrayList<>();
 
 
-    public FavoriteMovieFragment() {
+    public FavoriteTVFragment() {
         // Required empty public constructor
     }
 
@@ -41,8 +40,7 @@ public class FavoriteMovieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View output = inflater.inflate(R.layout.fragment_favorite_movie, container, false);
-
+        View output = inflater.inflate(R.layout.fragment_favorite_tv, container, false);
 
         progressBar = output.findViewById(R.id.progress);
         recyclerView= (RecyclerView) output.findViewById(R.id.recycleview);
@@ -52,10 +50,11 @@ public class FavoriteMovieFragment extends Fragment {
 
         FavoriteDatabase database = Room.databaseBuilder(getContext(),FavoriteDatabase.class,"expenses_db").allowMainThreadQueries().build();
         favoriteDao = database.getFavDao();
-        favmovies = favoriteDao.getMovies("Movie");
+        favshows = favoriteDao.getMovies("TVshow");
 
 
-        adapter = new FavoriteMovieAdapter(getContext(), favmovies);
+
+        adapter = new FavoriteMovieAdapter(getContext(), favshows);
 
 
         recyclerView.setAdapter(adapter);
@@ -71,9 +70,8 @@ public class FavoriteMovieFragment extends Fragment {
         progressBar.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
 
+       return  output;
 
-
-        return  output;
     }
 
 }

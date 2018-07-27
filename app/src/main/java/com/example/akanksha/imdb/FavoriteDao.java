@@ -18,8 +18,11 @@ public interface FavoriteDao {
     void deleteFav(FavoriteEntity movie);
 
 
-    @Query("select * from favorite")
-    List<FavoriteEntity> getMovies();
+    @Query("select * from favorite where type = :Type")
+    List<FavoriteEntity> getMovies(String Type);
+
+    @Query("select * from favorite where type = :Type")
+    List<FavoriteEntity> getShows(String Type);
 
 
     @Query("select movid from favorite where posterPath = :poster")

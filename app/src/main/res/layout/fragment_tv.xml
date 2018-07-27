@@ -30,7 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Popular"
+                android:text="Airing Today"
                 android:textStyle="bold"
                 android:textSize="30dp"
                 android:layout_marginLeft="10dp"
@@ -38,7 +38,7 @@
 
             <TextView
 
-                android:id="@+id/viewpopular"
+                android:id="@+id/viewtoday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -68,7 +68,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="In Theaters"
+                android:text="On The Air"
                 android:textStyle="bold"
                 android:textSize="30dp"
                 android:layout_marginLeft="10dp"
@@ -76,7 +76,7 @@
 
             <TextView
 
-                android:id="@+id/viewnowplaying"
+                android:id="@+id/viewonair"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -107,7 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Coming Soon"
+                android:text="Popular"
                 android:textStyle="bold"
                 android:textSize="30dp"
                 android:layout_marginLeft="10dp"
@@ -115,7 +115,7 @@
 
             <TextView
 
-                android:id="@+id/viewcomingsoon"
+                android:id="@+id/viewpopular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"

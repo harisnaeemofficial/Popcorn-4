@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.RoomDatabase;
 
 
-@Database(entities = {FavoriteEntity.class},version = 1)
+@Database(entities = {FavoriteEntity.class},version = 2)
 public abstract class FavoriteDatabase extends RoomDatabase {
 
     abstract FavoriteDao getFavDao();

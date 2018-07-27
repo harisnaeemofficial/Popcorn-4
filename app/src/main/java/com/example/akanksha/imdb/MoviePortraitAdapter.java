@@ -74,7 +74,7 @@ public class MoviePortraitAdapter extends RecyclerView.Adapter<MoviePortraitHold
             public void onClick(View view) {
 
                 //listener.favButtonClicked(movie,moviePortraitHolder.getAdapterPosition());
-                FavoriteEntity fmovie= new FavoriteEntity(movie.getId(),movie.getVoteAverage(),movie.getPosterPath());
+                FavoriteEntity fmovie= new FavoriteEntity(movie.getId(),movie.getVoteAverage(),movie.getPosterPath(),"Movie");
                 favoriteDao.addFav(fmovie);
 
                 moviePortraitHolder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));

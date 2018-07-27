@@ -43,8 +43,9 @@ public class FavoriteActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        FavoriteMovieFragment fragment = new FavoriteMovieFragment();
+        //FavoriteMovieFragment fragment = new FavoriteMovieFragment();
 
+        FavoriteTVFragment fragment = new FavoriteTVFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 

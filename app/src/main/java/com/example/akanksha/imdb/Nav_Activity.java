@@ -105,6 +105,14 @@ public class Nav_Activity extends AppCompatActivity
 
         } else if (id == R.id.tvshows) {
 
+           TVFragment fragment = new TVFragment();
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+            transaction.replace(R.id.container,fragment);
+            transaction.commit();
+
         } else if (id == R.id.favorites) {
 
 

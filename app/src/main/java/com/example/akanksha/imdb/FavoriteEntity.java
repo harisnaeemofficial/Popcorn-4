@@ -14,13 +14,15 @@ public class FavoriteEntity {
     private  int movid;
     private Double voteAverage;
     private String posterPath;
+    private String type;
 
 
-    public FavoriteEntity( int movid, Double voteAverage, String posterPath) {
+    public FavoriteEntity( int movid, Double voteAverage, String posterPath, String type) {
 
         this.movid = movid;
         this.voteAverage = voteAverage;
         this.posterPath = posterPath;
+        this.type = type;
     }
 
 
@@ -55,4 +57,8 @@ public class FavoriteEntity {
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
     }
+
+    public String getType() { return type; }
+
+    public void setType(String type) { this.type = type; }
 }

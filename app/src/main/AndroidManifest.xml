@@ -25,10 +25,14 @@
         <activity
             android:name=".ViewActivity"
             android:label="@string/title_activity_view"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FavoriteActivity"
-            android:label="@string/title_activity_favorite"></activity>
+            android:label="@string/title_activity_favorite" />
+        <activity
+            android:name=".ViewAllTVActivity"
+            android:label="@string/title_activity_view_all_tv"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
