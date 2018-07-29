@@ -32,7 +32,19 @@
         <activity
             android:name=".ViewAllTVActivity"
             android:label="@string/title_activity_view_all_tv"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MovieDetailActivity"
+            android:label="@string/title_activity_movie_detail"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".UserReviewsActivity"
+            android:label="@string/title_activity_user_reviews"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

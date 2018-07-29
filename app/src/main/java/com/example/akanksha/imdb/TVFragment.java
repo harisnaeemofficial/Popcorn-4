@@ -269,7 +269,7 @@ public class TVFragment extends Fragment implements TextView.OnClickListener {
     {
         Log.d("Fragment","seefunc");
 
-        Retrofit.Builder builder = new Retrofit.Builder()
+       Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/tv/")
                 .addConverterFactory(GsonConverterFactory.create());
 

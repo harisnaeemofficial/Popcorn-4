@@ -2,6 +2,7 @@ package com.example.akanksha.imdb;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.akanksha.imdb.detailsofmovie.MovieDetails;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -79,6 +81,18 @@ public class MoviePortraitAdapter extends RecyclerView.Adapter<MoviePortraitHold
 
                 moviePortraitHolder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
                 moviePortraitHolder.favorite.setEnabled(false);
+
+
+            }
+        });
+
+        moviePortraitHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, MovieDetailActivity.class);
+                intent.putExtra("id",movie.getId());
+                context.startActivity(intent);
 
 
             }

@@ -1,5 +1,6 @@
 package com.example.akanksha.imdb;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ public class MovieLandscapeHolder extends RecyclerView.ViewHolder{
     ImageView star ;
     TextView rating ;
     Button favorite ;
+    CardView cardView;
     View itemView;
 
     public MovieLandscapeHolder(View itemView) {
@@ -26,6 +28,7 @@ public class MovieLandscapeHolder extends RecyclerView.ViewHolder{
         star = itemView.findViewById(R.id.star);
         rating = itemView.findViewById(R.id.rating);
         favorite = itemView.findViewById(R.id.fav);
+        cardView = itemView.findViewById(R.id.cardhorizontal);
 
     }
 

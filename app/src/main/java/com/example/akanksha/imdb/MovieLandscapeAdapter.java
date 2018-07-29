@@ -2,12 +2,14 @@ package com.example.akanksha.imdb;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.akanksha.imdb.detailsofmovie.MovieDetails;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -64,7 +66,7 @@ public class MovieLandscapeAdapter extends RecyclerView.Adapter<MovieLandscapeHo
 
         holder.title.setText(movie.getTitle());
 
-        String url = "https://image.tmdb.org/t/p/w780/" + movie.getBackdrop_path();
+        String url = "https://image.tmdb.org/t/p/w1280/" + movie.getBackdrop_path();
 
         Picasso.get().load(url).into(holder.poster);
         
@@ -81,6 +83,19 @@ public class MovieLandscapeAdapter extends RecyclerView.Adapter<MovieLandscapeHo
 
             }
         });
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, MovieDetailActivity.class);
+                intent.putExtra("id",movie.getId());
+                context.startActivity(intent);
+
+
+            }
+        });
+
 
 
     }

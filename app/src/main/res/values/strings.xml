@@ -105,4 +105,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_view_all_tv">ViewAllTVActivity</string>
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="title_activity_user_reviews">UserReviewsActivity</string>
 </resources>
