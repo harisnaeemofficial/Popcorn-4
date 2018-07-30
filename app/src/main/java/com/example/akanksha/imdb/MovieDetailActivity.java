@@ -1,5 +1,6 @@
 package com.example.akanksha.imdb;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -10,8 +11,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +27,8 @@ import com.example.akanksha.imdb.detailsofmovie.Genre;
 import com.example.akanksha.imdb.detailsofmovie.Language;
 import com.example.akanksha.imdb.detailsofmovie.MovieDetails;
 import com.example.akanksha.imdb.detailsofmovie.Production;
+import com.example.akanksha.imdb.detailsofreviews.Review;
+import com.example.akanksha.imdb.detailsofreviews.ReviewRoot;
 import com.example.akanksha.imdb.detailsofvideo.Result;
 import com.example.akanksha.imdb.detailsofvideo.Video;
 import com.squareup.picasso.Picasso;
@@ -34,6 +40,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static java.sql.Types.NULL;
 
 public class MovieDetailActivity extends AppCompatActivity implements TextView.OnClickListener {
 
@@ -56,6 +64,16 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
     TextView originView;
     TextView durationView;
     TextView languageView;
+
+    TextView castViewAll;
+    TextView reviewViewAll;
+
+    TextView authorView;
+    TextView contentView;
+
+    Button fav;
+    Button add;
+    FavoriteDao favoriteDao;
 
     RecyclerView recyclerViewCast;
 
@@ -81,7 +99,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         //collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
@@ -89,6 +107,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
         Intent intent = getIntent();
         id = intent.getIntExtra("id",0);
+        //id=353081;
 
         AppBarLayout mAppBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -99,16 +118,36 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (scrollRange == -1) {
                     scrollRange = appBarLayout.getTotalScrollRange();
+
                 }
                 if (scrollRange + verticalOffset == 0) {
                     isShow = true;
                     //showOption(R.id.action_info);
+                    getSupportActionBar().setTitle("ajg8");
+
                 } else if (isShow) {
                     isShow = false;
                     //hideOption(R.id.action_info);
+
+                    getSupportActionBar().setDisplayShowTitleEnabled(false);
                 }
             }
         });
+
+        fav= findViewById(R.id.fav);
+        add = findViewById(R.id.add);
+
+        castViewAll = findViewById(R.id.viewcast);
+        reviewViewAll = findViewById(R.id.viewreviews);
+
+        authorView = findViewById(R.id.author);
+        contentView = findViewById(R.id.content);
+
+        castViewAll.setOnClickListener(this);
+        reviewViewAll.setOnClickListener(this);
+
+        authorView.setOnClickListener(this);
+        contentView.setOnClickListener(this);
 
         titleView = findViewById(R.id.title);
         toolGenreView = findViewById(R.id.toolgenre);
@@ -206,11 +245,16 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
         languageView = findViewById(R.id.language);
         detailsfetch(id);
 
+        reviewfetch(id);
+
 
     }
 
     public  void fetch(int id)
     {
+        FavoriteDatabase database = Room.databaseBuilder(this,FavoriteDatabase.class,"expenses_db").allowMainThreadQueries().build();
+        favoriteDao = database.getFavDao();
+
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/movie/")
@@ -226,7 +270,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
             @Override
             public void onResponse(Call<MovieDetails> call, Response<MovieDetails> response) {
 
-                MovieDetails details = response.body();
+                final MovieDetails details = response.body();
 
 
                 String url = "https://image.tmdb.org/t/p/w500/" + details.getPosterPath();
@@ -249,8 +293,35 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
                     }
 
+                int mov = favoriteDao.getmovid(details.getPosterPath());
+
+                if(mov == NULL) {
+                   fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
+                }
+
+                else {
+
+                    fav.setEnabled(false);
+                    fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                }
+
+                fav.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            FavoriteEntity fmovie= new FavoriteEntity(details.getId(),details.getVoteAverage(),details.getPosterPath(),"Movie");
+                            favoriteDao.addFav(fmovie);
+
+                            fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                            fav.setEnabled(false);
+
+                        }
+                    });
+
 
                     Log.d("Fragment","sucess");
+
+
 
             }
 
@@ -519,12 +590,87 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
     }
 
+    public  void reviewfetch(int id)
+    {
 
-    @Override
-    public void onClick(View v) {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("https://api.themoviedb.org/3/movie/")
+                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+
+        MovieSevice service = retrofit.create(MovieSevice.class);
+
+        Call<ReviewRoot> call = service.getReviewDetails(id,"7e00b48b59b417dfc865afa6de61f2aa");
+
+        call.enqueue(new Callback<ReviewRoot>() {
+            @Override
+            public void onResponse(Call<ReviewRoot> call, Response<ReviewRoot> response) {
+
+                ReviewRoot root = response.body();
+
+
+                ArrayList<Review> reviews = root.getResults();
+
+                if(reviews.isEmpty()) {
+
+                    authorView.setText(reviews.get(0).getAuthor());
+                    String s = reviews.get(0).getContent();
+                    int length = reviews.get(0).getContent().length();
+                    Log.d("Detailtextlength", Integer.toString(length));
+
+                    SpannableString text = new SpannableString("....");
+
+                    if (length > 120 && (Math.abs(length - 120)) > 10) {
+
+                        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(s, 0, 100);
+                        spannableStringBuilder.append(text);
+
+                        contentView.setText(spannableStringBuilder.toString());
+
+                    } else {
+
+                        contentView.setText(s);
+                    }
+
+                }
+                Log.d("Fragment","sucess");
+
+            }
+
+            @Override
+            public void onFailure(Call<ReviewRoot> call, Throwable t) {
+
+                Log.d("Fragment",t.getMessage());
+            }
+        });
 
 
     }
 
+
+
+    @Override
+    public void onClick(View v) {
+
+        int ide = v.getId();
+
+        if(ide == R.id.viewcast)
+        {
+            Intent intent= new Intent(this,ViewAllCastActivity.class);
+            intent.putExtra("id",id);
+            startActivity(intent);
+        }
+
+        else if( ide == R.id.viewreviews  || ide == R.id.content || ide == R.id.author)
+        {
+            Intent intent= new Intent(this,UserReviewsActivity.class);
+            intent.putExtra("id",id);
+            startActivity(intent);
+
+        }
+
+
+    }
 
 }

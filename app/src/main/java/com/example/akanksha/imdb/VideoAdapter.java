@@ -1,6 +1,8 @@
 package com.example.akanksha.imdb;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -44,13 +46,26 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoHolder> {
         final Result result = items.get(position);
 
 
-        Picasso.get().load("https://www.youtube.com/watch?v=" + result.getKey() + "/hqdefault.jpg")
+        Picasso.get().load("http://img.youtube.com/vi/" + result.getKey() + "/hqdefault.jpg")
                 .into(holder.videoView);
 
         if (result.getName() != null)
             holder.description.setText(result.getName());
         else
             holder.description.setText("");
+
+
+        holder.videoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent youtubeIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + result.getKey()));
+                context.startActivity(youtubeIntent);
+
+
+            }
+
+        });
 
 
 

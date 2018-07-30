@@ -2,6 +2,7 @@ package com.example.akanksha.imdb;
 
 import com.example.akanksha.imdb.detailsofCast.CastRoot;
 import com.example.akanksha.imdb.detailsofmovie.MovieDetails;
+import com.example.akanksha.imdb.detailsofreviews.ReviewRoot;
 import com.example.akanksha.imdb.detailsofvideo.Video;
 
 import retrofit2.Call;
@@ -29,6 +30,10 @@ Call<Video> getVideoDetails(@Path("id") int id, @Query("api_key") String api);
 
 @GET("{id}/similar")
 Call<Movie> getSimilarDetails(@Path("id") int id, @Query("api_key") String api);
+
+
+@GET("{id}/reviews")
+Call<ReviewRoot> getReviewDetails(@Path("id") int id, @Query("api_key") String api);
 
 
 

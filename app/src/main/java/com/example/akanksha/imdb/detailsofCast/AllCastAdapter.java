@@ -1,4 +1,4 @@
-package com.example.akanksha.imdb;
+package com.example.akanksha.imdb.detailsofCast;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,36 +7,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.akanksha.imdb.detailsofCast.Cast;
+import com.example.akanksha.imdb.CastHolder;
+import com.example.akanksha.imdb.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class CastAdapter extends RecyclerView.Adapter<CastHolder>{
-
+public class AllCastAdapter extends RecyclerView.Adapter<AllCastHolder>{
 
     LayoutInflater inflater;
     ArrayList<Cast> items;
     Context context;
 
-    public CastAdapter(ArrayList items, Context context) {
+    public AllCastAdapter(ArrayList<Cast> items, Context context) {
+
         this.items = items;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public CastHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AllCastHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View output= inflater.inflate(R.layout.cast_row,null,false);
+        View output= inflater.inflate(R.layout.view_all_cast_row,null,false);
 
-        return new CastHolder(output);
+        return new AllCastHolder(output);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CastHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AllCastHolder holder, int position) {
 
         final  Cast cast = items.get(position);
 

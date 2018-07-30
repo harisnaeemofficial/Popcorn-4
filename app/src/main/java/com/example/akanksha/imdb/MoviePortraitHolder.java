@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 public class MoviePortraitHolder extends RecyclerView.ViewHolder {
 
-    ImageView poster ;
-    ImageView star ;
-    TextView rating ;
-    Button favorite ;
-    CardView cardView;
-    View itemView;
+    public ImageView poster ;
+    public ImageView star ;
+    public TextView rating ;
+    public Button favorite ;
+    public CardView cardView;
+    public View itemView;
 
     public MoviePortraitHolder(@NonNull View itemView) {
 

@@ -360,5 +360,14 @@ public class Movie_Fragment extends Fragment implements TextView.OnClickListener
         startActivity(intent);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        adapter1.notifyDataSetChanged();
+        adapter2.notifyDataSetChanged();
+        adapter3.notifyDataSetChanged();
+        adapter4.notifyDataSetChanged();
+
+    }
 }
