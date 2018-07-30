@@ -16,13 +16,11 @@
             android:name=".Nav_Activity"
             android:label="@string/title_activity_nav_"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ViewActivity"
@@ -38,14 +36,16 @@
         <activity
             android:name=".MovieDetailActivity"
             android:label="@string/title_activity_movie_detail"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".UserReviewsActivity"
             android:label="@string/title_activity_user_reviews"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ViewAllCastActivity" />
+        <activity
+            android:name=".WatchListActivity"
+            android:label="@string/title_activity_watch_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ViewAllCastActivity"></activity>
     </application>
 
 </manifest>

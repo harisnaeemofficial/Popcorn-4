@@ -107,4 +107,5 @@
     <string name="title_activity_view_all_tv">ViewAllTVActivity</string>
     <string name="title_activity_movie_detail">MovieDetailActivity</string>
     <string name="title_activity_user_reviews">UserReviewsActivity</string>
+    <string name="title_activity_watch_list">WatchListActivity</string>
 </resources>

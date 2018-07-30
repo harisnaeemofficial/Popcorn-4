@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.akanksha.imdb.AddtoWatchlist.WatchEntity;
 import com.example.akanksha.imdb.detailsofCast.Cast;
 import com.example.akanksha.imdb.detailsofCast.CastRoot;
 import com.example.akanksha.imdb.detailsofCast.Crew;
@@ -98,8 +99,6 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
         setContentView(R.layout.activity_movie_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         //collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
@@ -294,6 +293,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
                     }
 
                 int mov = favoriteDao.getmovid(details.getPosterPath());
+                int watchmov = favoriteDao.getWatchmovid(details.getPosterPath());
 
                 if(mov == NULL) {
                    fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
@@ -303,6 +303,16 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
                     fav.setEnabled(false);
                     fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                }
+
+                if(watchmov == NULL) {
+                    add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
+                }
+
+                else {
+
+                    add.setEnabled(false);
+                    add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
                 }
 
                 fav.setOnClickListener(new View.OnClickListener() {
@@ -317,6 +327,19 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
                         }
                     });
+
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        WatchEntity wmovie= new WatchEntity(details.getId(),details.getVoteAverage(),details.getPosterPath(),"Movie");
+                        favoriteDao.addWatch(wmovie);
+
+                        add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                        add.setEnabled(false);
+
+                    }
+                });
 
 
                     Log.d("Fragment","sucess");

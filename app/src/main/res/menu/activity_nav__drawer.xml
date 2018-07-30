@@ -18,6 +18,11 @@
             android:icon="@drawable/ic_favorite_black_24dp"
             android:title="Favorites" />
 
+        <item
+            android:id="@+id/watchlist"
+            android:icon="@drawable/ic_favorite_black_24dp"
+            android:title="WatchList" />
+
 
     </group>
 

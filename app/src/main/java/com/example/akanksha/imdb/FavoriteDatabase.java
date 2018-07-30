@@ -5,8 +5,10 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.RoomDatabase;
 
+import com.example.akanksha.imdb.AddtoWatchlist.WatchEntity;
 
-@Database(entities = {FavoriteEntity.class},version = 2)
+
+@Database(entities = {FavoriteEntity.class, WatchEntity.class},version = 2)
 public abstract class FavoriteDatabase extends RoomDatabase {
 
     abstract FavoriteDao getFavDao();
