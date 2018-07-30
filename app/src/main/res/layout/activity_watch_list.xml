@@ -29,8 +29,8 @@
             <android.support.design.widget.TabItem
                 android:id="@+id/movies"
                 android:text="Movies"
-                android:icon="@drawable/ic_home_black_24dp"
-                android:layout_width="wrap_content"
+                android:icon="@drawable/ic_movie_black_24dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabPaddingStart="10dp"
                 app:tabPaddingEnd="10dp"
@@ -39,8 +39,8 @@
             <android.support.design.widget.TabItem
                 android:id="@+id/shows"
                 android:text="TVshows"
-                android:icon="@drawable/ic_dashboard_black_24dp"
-                android:layout_width="wrap_content"
+                android:icon="@drawable/ic_tv_black_24dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabPaddingStart="10dp"
                 app:tabPaddingEnd="10dp"

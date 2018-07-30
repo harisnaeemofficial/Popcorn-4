@@ -16,10 +16,12 @@ import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.akanksha.imdb.AddtoWatchlist.WatchEntity;
 import com.example.akanksha.imdb.detailsofCast.Cast;
 import com.example.akanksha.imdb.detailsofCast.CastRoot;
@@ -76,10 +78,10 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
     Button add;
     FavoriteDao favoriteDao;
 
+    FrameLayout frameLayout;
+
     RecyclerView recyclerViewCast;
-
     RecyclerView recyclerViewVideo;
-
     RecyclerView recyclerViewMore;
 
     CastAdapter adapter1;
@@ -92,6 +94,9 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
     ArrayList<MoviePortrait> movies = new ArrayList<>();
     int id;
 
+    LottieAnimationView animationView;
+    LottieAnimationView animationViewFav;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +104,8 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
         setContentView(R.layout.activity_movie_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
@@ -122,17 +129,21 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
                 if (scrollRange + verticalOffset == 0) {
                     isShow = true;
                     //showOption(R.id.action_info);
-                    getSupportActionBar().setTitle("ajg8");
+                    getSupportActionBar().setDisplayShowTitleEnabled(true);
 
                 } else if (isShow) {
                     isShow = false;
                     //hideOption(R.id.action_info);
-
                     getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
                 }
             }
         });
 
+        animationView= findViewById(R.id.animation_view);
+        animationViewFav = findViewById(R.id.animation_fav);
+        frameLayout = findViewById(R.id.reviewframe);
         fav= findViewById(R.id.fav);
         add = findViewById(R.id.add);
 
@@ -284,6 +295,8 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
                 ratingView.setText(details.getVoteAverage().toString() + "/10");
                 titleView.setText(details.getTitle());
 
+                getSupportActionBar().setTitle(details.getTitle());
+
                 ArrayList<Genre> genres = details.getGenres();
 
 
@@ -322,7 +335,9 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
                             FavoriteEntity fmovie= new FavoriteEntity(details.getId(),details.getVoteAverage(),details.getPosterPath(),"Movie");
                             favoriteDao.addFav(fmovie);
 
-                            fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                            //fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                            animationViewFav.setVisibility(View.VISIBLE);
+                            fav.setVisibility(View.INVISIBLE);
                             fav.setEnabled(false);
 
                         }
@@ -635,9 +650,9 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
                 ArrayList<Review> reviews = root.getResults();
 
-                if(reviews.isEmpty()) {
+                if(!reviews.isEmpty()) {
 
-                    authorView.setText(reviews.get(0).getAuthor());
+                   /* authorView.setText(reviews.get(0).getAuthor());
                     String s = reviews.get(0).getContent();
                     int length = reviews.get(0).getContent().length();
                     Log.d("Detailtextlength", Integer.toString(length));
@@ -654,7 +669,21 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
                     } else {
 
                         contentView.setText(s);
-                    }
+                    }*/
+
+                //}
+
+                //else
+                //{
+                   /* authorView.setVisibility(View.GONE);
+                    contentView.setVisibility(View.GONE);
+                    LottieAnimationView animationView = new LottieAnimationView(MovieDetailActivity.this);
+                    animationView.setAnimation(R.raw.not_found);
+                    frameLayout.addView(animationView);
+                    animationView.playAnimation();*/
+                   animationView.setVisibility(View.VISIBLE);
+
+
 
                 }
                 Log.d("Fragment","sucess");

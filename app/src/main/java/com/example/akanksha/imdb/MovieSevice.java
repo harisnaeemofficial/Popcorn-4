@@ -2,6 +2,7 @@ package com.example.akanksha.imdb;
 
 import com.example.akanksha.imdb.detailsofCast.CastRoot;
 import com.example.akanksha.imdb.detailsofmovie.MovieDetails;
+import com.example.akanksha.imdb.detailsofperson.Person;
 import com.example.akanksha.imdb.detailsofreviews.ReviewRoot;
 import com.example.akanksha.imdb.detailsofvideo.Video;
 
@@ -34,6 +35,16 @@ Call<Movie> getSimilarDetails(@Path("id") int id, @Query("api_key") String api);
 
 @GET("{id}/reviews")
 Call<ReviewRoot> getReviewDetails(@Path("id") int id, @Query("api_key") String api);
+
+@GET("{id}")
+Call<Person> getPersonDetails(@Path("id") long id, @Query("api_key") String api);
+
+@GET("{id}/movie_credits")
+Call<MovieCast> getMovieCastDetails(@Path("id") long id, @Query("api_key") String api);
+
+@GET("{id}/tv_credits")
+Call<MovieCast> getTVCastDetails(@Path("id") long id, @Query("api_key") String api);
+
 
 
 

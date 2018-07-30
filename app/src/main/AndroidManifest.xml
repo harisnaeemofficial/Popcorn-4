@@ -27,16 +27,13 @@
             android:label="@string/title_activity_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".FavoriteActivity"
-            android:label="@string/title_activity_favorite" />
-        <activity
             android:name=".ViewAllTVActivity"
             android:label="@string/title_activity_view_all_tv"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MovieDetailActivity"
             android:label="@string/title_activity_movie_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UserReviewsActivity"
             android:label="@string/title_activity_user_reviews"
@@ -45,7 +42,20 @@
         <activity
             android:name=".WatchListActivity"
             android:label="@string/title_activity_watch_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CastDetailActivity"
+            android:label="@string/title_activity_cast_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TVDetailActivity"
+            android:label="@string/title_activity_tvdetail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FavoriteActivity"
+            android:label="@string/title_activity_favorite"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>

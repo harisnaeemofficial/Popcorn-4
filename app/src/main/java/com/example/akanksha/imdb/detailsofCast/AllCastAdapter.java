@@ -48,17 +48,6 @@ public class AllCastAdapter extends RecyclerView.Adapter<AllCastHolder>{
 
         Picasso.get().load(url).into(holder.imageView);
 
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-            }
-        });
-
-
-
     }
 
     @Override

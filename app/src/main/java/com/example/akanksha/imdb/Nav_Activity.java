@@ -1,6 +1,7 @@
 package com.example.akanksha.imdb;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -114,7 +115,6 @@ public class Nav_Activity extends AppCompatActivity
 
             Intent intent = new Intent(this,FavoriteActivity.class);
 
-            //intent.putExtras(bundle);
             startActivity(intent);
 
 
@@ -125,7 +125,6 @@ public class Nav_Activity extends AppCompatActivity
 
             Intent intent = new Intent(this,WatchListActivity.class);
 
-            //intent.putExtras(bundle);
             startActivity(intent);
 
 
@@ -134,7 +133,31 @@ public class Nav_Activity extends AppCompatActivity
 
         else if (id == R.id.share) {
 
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            String extraText = "Hey! Want To Contribute! Fork It .\n";
+            extraText += "https://github.com/iam-akankshaa/Popcorn";
+            intent.putExtra(Intent.EXTRA_TEXT, extraText);
+            startActivity(intent);
+
         } else if (id == R.id.about) {
+
+
+            Intent intent = new Intent(this,AboutActivity.class);
+            startActivity(intent);
+
+        }
+
+        else if(id == R.id.feedback)
+        {
+
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SENDTO); //Only For Mail
+
+            Uri u =Uri.parse("mailto:akankshajain0209@gmail.com");
+
+            intent.setData(u);
+            startActivity(intent);
 
         }
 

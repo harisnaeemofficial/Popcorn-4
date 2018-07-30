@@ -1,6 +1,7 @@
 package com.example.akanksha.imdb;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -51,6 +52,10 @@ public class CastAdapter extends RecyclerView.Adapter<CastHolder>{
             @Override
             public void onClick(View v) {
 
+
+                Intent intent = new Intent(context,CastDetailActivity.class);
+                intent.putExtra("id",cast.getId());
+                context.startActivity(intent);
 
 
             }

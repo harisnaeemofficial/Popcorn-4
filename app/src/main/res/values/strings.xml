@@ -108,4 +108,6 @@
     <string name="title_activity_movie_detail">MovieDetailActivity</string>
     <string name="title_activity_user_reviews">UserReviewsActivity</string>
     <string name="title_activity_watch_list">WatchListActivity</string>
+    <string name="title_activity_cast_detail">CastDetailActivity</string>
+    <string name="title_activity_tvdetail">TVDetailActivity</string>
 </resources>
