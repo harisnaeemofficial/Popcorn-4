@@ -43,14 +43,17 @@ public class ViewActivity extends AppCompatActivity {
     int currentItems;
     int scrolledItems;
     int totalItems;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Intent intent = getIntent();
         cat = intent.getStringExtra("category") ;
@@ -76,8 +79,6 @@ public class ViewActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         final GridLayoutManager layoutManager1 = new GridLayoutManager(this,3);
         recyclerView.setLayoutManager(layoutManager1);
@@ -123,6 +124,7 @@ public class ViewActivity extends AppCompatActivity {
     void see(String cat,final ArrayList<MoviePortrait> list,final MoviePortraitAdapter adapter)
     {
 
+        toolbar.setTitle(cat);
         isLoading=true;
 
         Log.d("Fragment","seefunc");

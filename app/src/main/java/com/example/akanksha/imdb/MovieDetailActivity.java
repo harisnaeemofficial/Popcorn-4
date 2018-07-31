@@ -96,6 +96,8 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
     LottieAnimationView animationView;
     LottieAnimationView animationViewFav;
+    LottieAnimationView animationViewLoad;
+    LottieAnimationView animationViewLoad1;
 
 
     @Override
@@ -143,7 +145,10 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
         animationView= findViewById(R.id.animation_view);
         animationViewFav = findViewById(R.id.animation_fav);
-        frameLayout = findViewById(R.id.reviewframe);
+        animationViewLoad = findViewById(R.id.animation_load);
+        animationViewLoad1 = findViewById(R.id.animation_loadd);
+
+        //frameLayout = findViewById(R.id.reviewframe);
         fav= findViewById(R.id.fav);
         add = findViewById(R.id.add);
 
@@ -163,7 +168,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
         toolGenreView = findViewById(R.id.toolgenre);
         landscapeView = findViewById(R.id.expandedImage);
         posterView = findViewById(R.id.poster);
-        genreView = findViewById(R.id.genre);
+        //genreView = findViewById(R.id.genre);
         overView = findViewById(R.id.overview);
         ratingView = findViewById(R.id.rating);
 
@@ -173,7 +178,6 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
         adapter1 = new CastAdapter( casts,this);
 
-        //Toast.makeText(this,"oncreatefrag", Toast.LENGTH_LONG).show();
         Log.d("Fragment","oncretefrag");
 
 
@@ -181,13 +185,11 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
         recyclerViewCast.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerViewCast.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerViewCast.setLayoutManager(layoutManager1);
 
 
-        Toast.makeText(this,"afterSet", Toast.LENGTH_LONG).show();
         Log.d("Fragment","afterset");
 
         castfetch(id,casts,adapter1);
@@ -204,13 +206,10 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
         recyclerViewVideo.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerViewVideo.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerViewVideo.setLayoutManager(layoutManager2);
 
-
-        Toast.makeText(this,"afterSet", Toast.LENGTH_LONG).show();
         Log.d("Fragment","afterset");
 
         videofetch(id,videos,adapter2);
@@ -234,7 +233,6 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
         recyclerViewMore.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerViewMore.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         LinearLayoutManager layoutManager3 = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerViewMore.setLayoutManager(layoutManager3);
@@ -297,6 +295,12 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
                 getSupportActionBar().setTitle(details.getTitle());
 
+                animationViewLoad.setVisibility(View.GONE);
+                landscapeView.setVisibility(View.VISIBLE);
+
+                animationViewLoad1.setVisibility(View.GONE);
+                posterView.setVisibility(View.VISIBLE);
+
                 ArrayList<Genre> genres = details.getGenres();
 
 
@@ -309,23 +313,25 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
                 int watchmov = favoriteDao.getWatchmovid(details.getPosterPath());
 
                 if(mov == NULL) {
-                   fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
+                   fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_border_yellow_600_24dp));
                 }
 
                 else {
 
                     fav.setEnabled(false);
-                    fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                    //fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                    animationViewFav.setVisibility(View.VISIBLE);
+                    fav.setVisibility(View.INVISIBLE);
                 }
 
                 if(watchmov == NULL) {
-                    add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
+                    add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_add_circle_outline_yellow_600_24dp));
                 }
 
                 else {
 
                     add.setEnabled(false);
-                    add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                    add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_add_circle_red_700_24dp));
                 }
 
                 fav.setOnClickListener(new View.OnClickListener() {
@@ -350,7 +356,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
                         WatchEntity wmovie= new WatchEntity(details.getId(),details.getVoteAverage(),details.getPosterPath(),"Movie");
                         favoriteDao.addWatch(wmovie);
 
-                        add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+                        add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_add_circle_red_700_24dp));
                         add.setEnabled(false);
 
                     }
@@ -650,9 +656,9 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
                 ArrayList<Review> reviews = root.getResults();
 
-                if(!reviews.isEmpty()) {
+                if( !reviews.isEmpty()) {
 
-                   /* authorView.setText(reviews.get(0).getAuthor());
+                    authorView.setText(reviews.get(0).getAuthor());
                     String s = reviews.get(0).getContent();
                     int length = reviews.get(0).getContent().length();
                     Log.d("Detailtextlength", Integer.toString(length));
@@ -669,12 +675,12 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
                     } else {
 
                         contentView.setText(s);
-                    }*/
+                    }
 
-                //}
+                }
 
-                //else
-                //{
+                else
+                {
                    /* authorView.setVisibility(View.GONE);
                     contentView.setVisibility(View.GONE);
                     LottieAnimationView animationView = new LottieAnimationView(MovieDetailActivity.this);
@@ -682,8 +688,6 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
                     frameLayout.addView(animationView);
                     animationView.playAnimation();*/
                    animationView.setVisibility(View.VISIBLE);
-
-
 
                 }
                 Log.d("Fragment","sucess");

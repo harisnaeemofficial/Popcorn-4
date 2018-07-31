@@ -31,24 +31,42 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+     <FrameLayout
+
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/expandedImage"
                 android:layout_width="match_parent"
                 android:fitsSystemWindows="true"
                 android:layout_height="230dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/background"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7" />
 
-    <TextView
+     <com.airbnb.lottie.LottieAnimationView
+
+         android:id="@+id/animation_load"
+         android:layout_width="match_parent"
+         android:layout_height="230dp"
+         android:scaleType="centerCrop"
+         app:lottie_rawRes="@raw/preloader"
+         app:lottie_loop="true"
+         app:lottie_autoPlay="true"
+         android:visibility="visible"
+         />
+
+     </FrameLayout>
+
+     <TextView
         android:id="@+id/title"
         android:layout_marginTop="8dp"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="lnuyftfhggyfidshgu"
         android:layout_marginStart="130dp"
         android:textSize="20dp"
+         android:textColor="@color/grey"
         android:textStyle="bold"
         />
 
@@ -58,6 +76,7 @@
          android:layout_width="200dp"
          android:layout_height="wrap_content"
          android:layout_marginStart="130dp"
+         android:textColor="@color/grey"
          android:textSize="13dp"
 
          />
@@ -66,20 +85,37 @@
 
 </LinearLayout>
 
+  <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content">
+
             <ImageView
 
                 android:id="@+id/poster"
-
                 android:layout_width="105dp"
                 android:layout_height="170dp"
                 android:layout_marginTop="160dp"
                 app:layout_anchor="@id/toolbar"
                 app:layout_anchorGravity="bottom|start"
-                android:src="@drawable/smiley"
                 android:scaleType="centerCrop"
                 android:layout_marginLeft="16dp"
                 android:fitsSystemWindows="true"/>
 
+
+            <com.airbnb.lottie.LottieAnimationView
+
+                android:id="@+id/animation_loadd"
+                android:layout_width="105dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="160dp"
+                android:layout_marginLeft="16dp"
+                android:scaleType="centerCrop"
+                app:lottie_rawRes="@raw/preloader"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                android:visibility="visible" />
+
+  </FrameLayout>
 
 
             <android.support.v7.widget.Toolbar

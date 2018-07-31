@@ -67,7 +67,7 @@ public class MoviePortraitAdapter extends RecyclerView.Adapter<MoviePortraitHold
             moviePortraitHolder.favorite.setEnabled(false);
             moviePortraitHolder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
         }
-        String url = "https://image.tmdb.org/t/p/w500/" + movie.getPosterPath();
+        String url = "https://image.tmdb.org/t/p/w780/" + movie.getPosterPath();
 
         Picasso.get().load(url).into(moviePortraitHolder.poster);
 

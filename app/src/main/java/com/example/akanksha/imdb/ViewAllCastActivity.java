@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,12 +29,19 @@ public class ViewAllCastActivity extends AppCompatActivity {
     AllCastAdapter adapter;
     RecyclerView recyclerViewCast;
     int id;
+    Toolbar toolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_cast);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setTitle("Cast");
 
 
         recyclerViewCast = findViewById(R.id.recycleviewallcast);
@@ -50,13 +58,13 @@ public class ViewAllCastActivity extends AppCompatActivity {
 
         recyclerViewCast.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerViewCast.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));
+       // recyclerViewCast.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));
+
 
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerViewCast.setLayoutManager(layoutManager1);
 
 
-        Toast.makeText(this,"afterSet", Toast.LENGTH_LONG).show();
         Log.d("Fragment","afterset");
 
         castfetch(id,casts,adapter);

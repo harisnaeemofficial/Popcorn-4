@@ -3,7 +3,9 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    >
 
 
     <ImageView
@@ -12,6 +14,8 @@
         android:layout_height="160dp"
         android:layout_weight="1.5"
         android:scaleType="fitXY"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         />
 
 
@@ -20,6 +24,8 @@
         android:layout_height="160dp"
         android:orientation="vertical"
         android:layout_weight="3"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         >
 
     <TextView
@@ -30,6 +36,7 @@
         android:textStyle="bold"
         android:text="ajiuGFEV"
         android:textSize="15dp"
+        android:textColor="@color/white"
         />
 
 
@@ -39,6 +46,7 @@
         android:layout_height="wrap_content"
         android:text="jbceiwy"
         android:textSize="15dp"
+        android:textColor="@color/white"
 
         />
     </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.akanksha.imdb;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,7 +34,7 @@ public class TVPotraitAdapter extends RecyclerView.Adapter<MoviePortraitHolder>{
     public MoviePortraitHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View output= inflater.inflate(R.layout.horizontal_movie_row,null,false);
+        View output= inflater.inflate(R.layout.vertical_movie_row,null,false);
 
         return new MoviePortraitHolder(output);
 
@@ -76,6 +77,19 @@ public class TVPotraitAdapter extends RecyclerView.Adapter<MoviePortraitHolder>{
 
             }
         });
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, TVDetailActivity.class);
+                intent.putExtra("id",shows.getId());
+                context.startActivity(intent);
+
+
+            }
+        });
+
 
     }
 

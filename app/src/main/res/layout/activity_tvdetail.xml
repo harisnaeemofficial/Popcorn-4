@@ -7,41 +7,133 @@
     android:fitsSystemWindows="true"
     tools:context=".TVDetailActivity">
 
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="360dp"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
+            android:background="@color/orange"
+            app:expandedTitleMarginStart="140dp"
+            app:expandedTitleTextAppearance="?android:textAppearanceMedium"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/expandedImage"
+                        android:layout_width="match_parent"
+                        android:fitsSystemWindows="true"
+                        android:layout_height="230dp"
+                        android:scaleType="centerCrop"
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.7" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+
+                        android:id="@+id/animation_load"
+                        android:layout_width="match_parent"
+                        android:layout_height="230dp"
+                        android:scaleType="centerCrop"
+                        app:lottie_rawRes="@raw/preloader"
+                        app:lottie_loop="true"
+                        app:lottie_autoPlay="true"
+                        android:visibility="visible"
+                        />
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="130dp"
+                    android:textSize="20dp"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/toolgenre"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="130dp"
+                    android:textColor="@color/grey"
+                    android:textSize="13dp"
+
+                    />
+
+
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+
+                    android:id="@+id/poster"
+                    android:layout_width="105dp"
+                    android:layout_height="170dp"
+                    android:layout_marginTop="160dp"
+                    app:layout_anchor="@id/toolbar"
+                    app:layout_anchorGravity="bottom|start"
+                    android:scaleType="centerCrop"
+                    android:layout_marginLeft="16dp"
+                    android:fitsSystemWindows="true"/>
+
+
+                <com.airbnb.lottie.LottieAnimationView
+
+                    android:id="@+id/animation_loadd"
+                    android:layout_width="105dp"
+                    android:layout_height="170dp"
+                    android:layout_marginTop="160dp"
+                    android:layout_marginLeft="16dp"
+                    android:scaleType="centerCrop"
+                    app:lottie_rawRes="@raw/preloader"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true"
+                    android:visibility="visible" />
+
+            </FrameLayout>
+
+
             <android.support.v7.widget.Toolbar
+
+                app:toolbarId="@+id/toolbarr"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+
         </android.support.design.widget.CollapsingToolbarLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_tvdetail" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:text="ajiuGFEV"
+        android:textColor="@color/white"
         android:textSize="15dp"
         android:layout_marginLeft="30dp"
         />
@@ -37,6 +38,7 @@
             android:id="@+id/charactername"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="jbceiwy"
             android:textSize="15dp"
             android:layout_marginLeft="30dp"

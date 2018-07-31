@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bla"
     tools:context=".Movie_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -21,8 +22,8 @@
     android:id="@+id/linear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,7 +37,8 @@
                 android:text="Popular"
                 android:textStyle="bold"
                 android:textSize="30dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/white"
                 />
 
            <TextView
@@ -45,8 +47,11 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_gravity="end"
-               android:text="View All"
+               android:text="SEE ALL"
                android:textStyle="bold"
+               android:layout_marginEnd="15dp"
+               android:layout_marginTop="10dp"
+               android:textColor="@color/white"
 
                />
 
@@ -56,6 +61,7 @@
             android:id="@+id/recycleview1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             />
 
 
@@ -74,7 +80,8 @@
                 android:text="In Theaters"
                 android:textStyle="bold"
                 android:textSize="30dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="12dp"
+                android:textColor="@color/white"
                 />
 
             <TextView
@@ -83,8 +90,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="View All"
+                android:text="SEE ALL"
                 android:textStyle="bold"
+                android:layout_marginEnd="15dp"
+                android:textColor="@color/white"
 
                 />
 
@@ -94,6 +103,7 @@
             android:id="@+id/recycleview2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             />
 
 
@@ -113,7 +123,9 @@
                 android:text="Coming Soon"
                 android:textStyle="bold"
                 android:textSize="30dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/white"
+
                 />
 
             <TextView
@@ -122,8 +134,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="View All"
+                android:text="SEE ALL"
                 android:textStyle="bold"
+                android:layout_marginEnd="15dp"
+                android:textColor="@color/white"
+
 
                 />
 
@@ -133,6 +148,7 @@
             android:id="@+id/recycleview3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             />
 
 
@@ -151,7 +167,9 @@
                 android:text="Top Rated"
                 android:textStyle="bold"
                 android:textSize="30dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="12dp"
+                android:textColor="@color/white"
+
                 />
 
             <TextView
@@ -160,8 +178,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="View All"
+                android:text="SEE ALL"
                 android:textStyle="bold"
+                android:layout_marginEnd="15dp"
+                android:textColor="@color/white"
+
 
                 />
 
@@ -171,6 +192,7 @@
             android:id="@+id/recycleview4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             />
 
 

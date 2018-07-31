@@ -5,7 +5,6 @@ import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.example.akanksha.imdb.AddtoWatchlist.WatchAdapter;
+import com.example.akanksha.imdb.AddtoWatchlist.WatchEntity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,18 +23,18 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteMovieFragment extends Fragment {
-
+public class WatchTVFragment extends Fragment {
 
     ProgressBar progressBar;
     RecyclerView recyclerView;
 
-    FavoriteMovieAdapter adapter;
+    WatchAdapter adapter;
     FavoriteDao favoriteDao;
-    List<FavoriteEntity> favmovies = new ArrayList<>();
+    List<WatchEntity> watchmovies = new ArrayList<>();
 
 
-    public FavoriteMovieFragment() {
+
+    public WatchTVFragment() {
         // Required empty public constructor
     }
 
@@ -41,7 +43,7 @@ public class FavoriteMovieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View output = inflater.inflate(R.layout.fragment_favorite_movie, container, false);
+        View output = inflater.inflate(R.layout.fragment_watch_movie, container, false);
 
 
         progressBar = output.findViewById(R.id.progress);
@@ -52,10 +54,10 @@ public class FavoriteMovieFragment extends Fragment {
 
         FavoriteDatabase database = Room.databaseBuilder(getContext(),FavoriteDatabase.class,"expenses_db").allowMainThreadQueries().build();
         favoriteDao = database.getFavDao();
-        favmovies = favoriteDao.getMovies("Movie");
+        watchmovies = favoriteDao.getWatchMovies("Tvshow");
 
 
-        adapter = new FavoriteMovieAdapter(getContext(), favmovies);
+        adapter = new WatchAdapter(getContext(), watchmovies);
 
 
         recyclerView.setAdapter(adapter);
@@ -74,5 +76,6 @@ public class FavoriteMovieFragment extends Fragment {
 
         return  output;
     }
+
 
 }

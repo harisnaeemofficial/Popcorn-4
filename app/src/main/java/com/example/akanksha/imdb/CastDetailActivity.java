@@ -1,9 +1,12 @@
 package com.example.akanksha.imdb;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,10 +16,12 @@ import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.akanksha.imdb.detailsofperson.Person;
 import com.squareup.picasso.Picasso;
 
@@ -36,6 +41,8 @@ public class CastDetailActivity extends AppCompatActivity {
     TextView birthView;
     TextView bioView;
 
+    TextView showView;
+
     RecyclerView recyclerViewMovie;
     RecyclerView recyclerViewTV;
 
@@ -44,7 +51,9 @@ public class CastDetailActivity extends AppCompatActivity {
 
     MoviePortraitAdapter adapter2;
     ArrayList<MoviePortrait> shows = new ArrayList<>();
+    LayoutInflater inflater;
 
+    LottieAnimationView animationView;
     long id;
 
     @Override
@@ -54,12 +63,44 @@ public class CastDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        AppBarLayout mAppBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = false;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    isShow = true;
+                    //showOption(R.id.action_info);
+                    getSupportActionBar().setDisplayShowTitleEnabled(true);
+
+                } else if (isShow) {
+                    isShow = false;
+                    //hideOption(R.id.action_info);
+                    getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
+                }
+            }
+        });
+
 
         imageView = findViewById(R.id.expandedImage);
         nameView = findViewById(R.id.name);
         placeView = findViewById(R.id.place);
         bioView = findViewById(R.id.overview);
         birthView = findViewById(R.id.dob);
+
+        showView = findViewById(R.id.tvcast);
+
+        animationView = findViewById(R.id.animation_load);
 
         Intent intent = getIntent();
         id = intent.getLongExtra("id",0);
@@ -82,7 +123,6 @@ public class CastDetailActivity extends AppCompatActivity {
 
         recyclerViewMovie.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerViewMovie.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         LinearLayoutManager layoutManager3 = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerViewMovie.setLayoutManager(layoutManager3);
@@ -107,8 +147,6 @@ public class CastDetailActivity extends AppCompatActivity {
         recyclerViewTV.setAdapter(adapter2);
 
         recyclerViewTV.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerViewTV.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerViewTV.setLayoutManager(layoutManager);
@@ -138,7 +176,7 @@ public class CastDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Person> call, Response<Person> response) {
 
-                Person person= response.body();
+                final Person person= response.body();
                 String url = "https://image.tmdb.org/t/p/h632/" + person.getProfilePath();
 
                 Picasso.get().load(url).into(imageView);
@@ -147,11 +185,16 @@ public class CastDetailActivity extends AppCompatActivity {
                 placeView.setText(person.getPlaceOfBirth());
                 birthView.setText(person.getBirthday());
                 //bioView.setText(person.getBiography());
+                animationView.setVisibility(View.GONE);
+                imageView.setVisibility(View.VISIBLE);
 
 
                 String s = person.getBiography();
                 int length = person.getBiography().length();
                 Log.d("Detailtextlength", Integer.toString(length));
+
+                getSupportActionBar().setTitle(person.getName());
+
 
                 SpannableString text = new SpannableString("....");
 
@@ -166,6 +209,26 @@ public class CastDetailActivity extends AppCompatActivity {
 
                     bioView.setText(s);
                 }
+
+                 inflater= (LayoutInflater) CastDetailActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                bioView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        View output = inflater.inflate(R.layout.alert_review, null, false);
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CastDetailActivity.this);
+
+                        TextView content = output.findViewById(R.id.content);
+                        content.setText(person.getBiography());
+
+                        builder.setView(output);
+                        AlertDialog dialog = builder.create(); //show the dialog
+                        dialog.show();
+
+
+                    }
+                });
 
 
                 //progressBar.setVisibility(View.GONE);
@@ -249,22 +312,28 @@ public class CastDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MovieCast> call, Response<MovieCast>response) {
 
-                MovieCast movie= response.body();
-                ArrayList<MoviePortrait> movies1 = movie.getCast();
+                MovieCast movie = response.body();
+                if (movie != null) {
+                    ArrayList<MoviePortrait> movies1 = movie.getCast();
 
-                list.clear();
-                for(int i = 0;i<movies1.size();i++){
+                    list.clear();
+                    for (int i = 0; i < movies1.size(); i++) {
 
-                    list.add(movies1.get(i));
+                        list.add(movies1.get(i));
 
+
+                    }
+
+                    adapter.notifyDataSetChanged();
 
                 }
 
-                adapter.notifyDataSetChanged();
+                else {
+                    showView.setVisibility(View.GONE);
+                }
                 //progressBar.setVisibility(View.GONE);
                 //linearLayout.setVisibility(View.VISIBLE);
-                Log.d("Fragment","sucess");
-
+                Log.d("Fragment", "sucess");
             }
 
             @Override

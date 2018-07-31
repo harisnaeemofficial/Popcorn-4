@@ -119,7 +119,6 @@ public class TVFragment extends Fragment implements TextView.OnClickListener {
 
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerView1.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView1.setLayoutManager(layoutManager);
@@ -149,8 +148,6 @@ public class TVFragment extends Fragment implements TextView.OnClickListener {
 
         recyclerView2.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerView2.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
-
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView2.setLayoutManager(layoutManager2);
         Log.d("Fragment","setr2");
@@ -176,8 +173,6 @@ public class TVFragment extends Fragment implements TextView.OnClickListener {
 
         recyclerView3.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerView3.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
-
         LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView3.setLayoutManager(layoutManager3);
         Log.d("Fragment","setr2");
@@ -202,8 +197,6 @@ public class TVFragment extends Fragment implements TextView.OnClickListener {
         recyclerView4.setAdapter(adapter4);
 
         recyclerView4.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerView4.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
 
         LinearLayoutManager layoutManager4 = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView4.setLayoutManager(layoutManager4);

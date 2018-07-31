@@ -16,18 +16,20 @@
 
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:elevation="30dp"
-       android:padding="10dp"
-       android:layout_marginLeft="10dp">
+        android:layout_marginTop="17dp"
+        android:elevation="40dp"
+        android:padding="10dp">
 
         <LinearLayout
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/grey"
+            >
 
 
-            <TextView
+          <!--  <TextView
                 android:id="@+id/genre"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
@@ -37,23 +39,26 @@
                 android:layout_marginTop="13dp"
                 android:textSize="20dp"
 
-                />
+                />-->
 
             <TextView
 
+                android:layout_marginTop="18dp"
                 android:id="@+id/overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:layout_marginTop="5dp"
+                android:textColor="@color/white"
                 />
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="40dp"
+                android:layout_marginBottom="18dp"
                 android:layout_marginEnd="40dp">
 
                 <LinearLayout
@@ -77,6 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="6.7"
+                    android:textColor="@color/white"
                     android:layout_marginTop="5dp"
                     />
 
@@ -101,7 +107,7 @@
 
                     <com.airbnb.lottie.LottieAnimationView
                         android:layout_marginLeft="70dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="6dp"
                         android:id="@+id/animation_fav"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -123,7 +129,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="25dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/ic_favorite_border_black_24dp"
+                    android:background="@drawable/ic_add_circle_outline_orange_300_24dp"
                     android:onClick="add"
                     />
 
@@ -142,20 +148,24 @@
         android:elevation="30dp">
 
     <LinearLayout
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:background="@color/grey"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="15dp"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="300dp"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:text="Cast"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="30dp"
                 android:layout_marginLeft="10dp"
@@ -166,8 +176,10 @@
                 android:id="@+id/viewcast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:layout_gravity="end"
-                android:text="View All"
+                android:layout_marginEnd="10dp"
+                android:text="SEE ALL"
                 android:textStyle="bold"
 
                 />
@@ -175,13 +187,16 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="5dp"
             android:id="@+id/recycleviewcast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="18dp"
             />
 
 
-        <TextView
+       <!-- <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Directed By"
@@ -221,7 +236,7 @@
             android:layout_marginStart="10dp"
             />
 
-
+-->
     </LinearLayout>
 
 
@@ -232,19 +247,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:elevation="30dp"
-        android:layout_marginLeft="10dp">
+        android:elevation="30dp">
 
         <LinearLayout
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/grey"
             android:orientation="vertical">
 
 
                 <TextView
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Trailers"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="30dp"
                     android:layout_marginLeft="10dp"
@@ -253,6 +272,9 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycleviewvideos"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
@@ -271,20 +293,24 @@
         android:elevation="30dp">
 
         <LinearLayout
+
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:background="@color/grey"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginStart="15dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="300dp"
+                    android:layout_width="240dp"
                     android:layout_height="wrap_content"
                     android:text="Reviews"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="30dp"
                     android:layout_marginLeft="10dp"
@@ -293,34 +319,40 @@
                 <TextView
 
                     android:id="@+id/viewreviews"
+                    android:layout_marginStart="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:layout_gravity="end"
-                    android:text="View All"
+                    android:layout_marginEnd="10dp"
+                    android:text="SEE ALL"
                     android:textStyle="bold"
 
                     />
 
             </LinearLayout>
 
-            <FrameLayout
+           <!-- <FrameLayout
 
                 android:id="@+id/reviewframe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
+-->
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
             <TextView
 
                 android:layout_marginTop="10dp"
                 android:id="@+id/author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="17dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 />
 
             <TextView
@@ -328,9 +360,11 @@
                 android:layout_marginTop="5dp"
                 android:id="@+id/content"
                 android:layout_width="match_parent"
+                android:textColor="@color/white"
                 android:layout_height="45dp"
                 android:textSize="15dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginBottom="18dp"
+                android:layout_marginStart="15dp"
                 />
                 </LinearLayout>
 
@@ -341,12 +375,119 @@
                     android:scaleType="centerCrop"
                     app:lottie_rawRes="@raw/warn"
                     app:lottie_loop="true"
+                    android:layout_marginBottom="18dp"
                     app:lottie_autoPlay="true"
                     android:visibility="gone"
                     android:layout_marginStart="30dp"
                     />
 
-            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:elevation="30dp"
+        android:padding="10dp">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:background="@color/grey"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_marginTop="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Storyline"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginStart="15dp"
+                />
+
+            <TextView
+
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="19dp"
+                android:text="Plot Summary"
+                android:layout_marginStart="15dp"
+                />
+
+            <TextView
+
+                android:layout_marginTop="5dp"
+                android:id="@+id/plot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:layout_marginStart="15dp"
+                />
+
+            <TextView
+
+                android:layout_marginTop="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="19dp"
+                android:text="Tagline"
+                android:layout_marginStart="15dp"
+                />
+
+            <TextView
+
+                android:layout_marginTop="5dp"
+                android:id="@+id/tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:layout_marginStart="15dp"
+                />
+
+
+            <TextView
+
+                android:layout_marginTop="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="19dp"
+                android:text="Genres"
+                android:layout_marginStart="15dp"
+                />
+
+
+            <TextView
+
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/storygenre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:layout_marginStart="15dp"
+                />
 
 
         </LinearLayout>
@@ -360,18 +501,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:elevation="30dp"
-        android:padding="10dp"
-        android:layout_marginLeft="10dp">
+        android:padding="10dp">
 
         <LinearLayout
+
+            android:background="@color/grey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
             <TextView
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:layout_weight="3"
                 android:text="More Like This"
                 android:textStyle="bold"
@@ -381,107 +526,15 @@
 
 
             <android.support.v7.widget.RecyclerView
+
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
                 android:id="@+id/recycleviewmore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
                 />
 
-
-
-        </LinearLayout>
-
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:elevation="30dp"
-        android:padding="10dp"
-        android:layout_marginLeft="10dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="Storyline"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:layout_marginStart="10dp"
-                />
-
-            <TextView
-
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="19dp"
-                android:text="Plot Summary"
-                android:layout_marginStart="10dp"
-                />
-
-            <TextView
-
-                android:layout_marginTop="5dp"
-                android:id="@+id/plot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:layout_marginStart="10dp"
-                />
-
-            <TextView
-
-                android:layout_marginTop="7dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="19dp"
-                android:text="Tagline"
-                android:layout_marginStart="10dp"
-                />
-
-            <TextView
-
-                android:layout_marginTop="5dp"
-                android:id="@+id/tag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:layout_marginStart="10dp"
-                />
-
-
-            <TextView
-
-                android:layout_marginTop="7dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="19dp"
-                android:text="Genres"
-                android:layout_marginStart="10dp"
-                />
-
-
-            <TextView
-
-                android:layout_marginTop="5dp"
-                android:id="@+id/storygenre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:layout_marginStart="10dp"
-                />
 
 
         </LinearLayout>
@@ -495,24 +548,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:elevation="30dp"
-        android:padding="10dp"
-        android:layout_marginLeft="10dp">
+        android:padding="10dp">
 
         <LinearLayout
+
+            android:background="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
             <TextView
+                android:layout_marginTop="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:text="Details"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="24sp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 />
 
             <TextView
@@ -521,9 +578,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:textSize="19dp"
                 android:text="Release Date"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 />
 
             <TextView
@@ -532,8 +590,9 @@
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:textSize="15dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 />
 
             <TextView
@@ -541,10 +600,11 @@
                 android:layout_marginTop="7dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="19dp"
                 android:text="Duration"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 />
 
             <TextView
@@ -553,8 +613,9 @@
                 android:id="@+id/duration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:textSize="15dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 />
 
 
@@ -564,9 +625,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:textSize="19dp"
                 android:text="Country of Origin "
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 />
 
 
@@ -576,8 +638,9 @@
                 android:id="@+id/origin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:textSize="15dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 />
 
 
@@ -587,9 +650,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:textSize="19dp"
                 android:text="Language Spoken"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 />
 
 
@@ -598,9 +662,11 @@
                 android:layout_marginTop="5dp"
                 android:id="@+id/language"
                 android:layout_width="match_parent"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="18dp"
                 />
 
 

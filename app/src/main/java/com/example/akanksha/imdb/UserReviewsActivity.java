@@ -44,6 +44,10 @@ public class UserReviewsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        toolbar.setTitle("User Reviews");
+
         recyclerViewReview = findViewById(R.id.recycleviewreviews);
         Intent intent = getIntent();
         id = intent.getIntExtra("id",0);
@@ -58,13 +62,10 @@ public class UserReviewsActivity extends AppCompatActivity {
 
         recyclerViewReview.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerViewReview.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));
 
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerViewReview.setLayoutManager(layoutManager1);
 
-
-        Toast.makeText(this,"afterSet", Toast.LENGTH_LONG).show();
         Log.d("Fragment","afterset");
 
        reviewfetch(id,reviews,adapter);

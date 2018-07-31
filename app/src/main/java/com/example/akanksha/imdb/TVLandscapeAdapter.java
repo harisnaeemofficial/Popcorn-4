@@ -2,6 +2,7 @@ package com.example.akanksha.imdb;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -75,6 +76,18 @@ public class TVLandscapeAdapter extends RecyclerView.Adapter<MovieLandscapeHolde
 
                 holder.favorite.setBackground(context.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
                 holder.favorite.setEnabled(false);
+
+            }
+        });
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, TVDetailActivity.class);
+                intent.putExtra("id",shows.getId());
+                context.startActivity(intent);
+
 
             }
         });

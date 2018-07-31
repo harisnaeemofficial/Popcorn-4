@@ -16,14 +16,16 @@ import android.view.MenuItem;
 
 public class Nav_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -34,6 +36,7 @@ public class Nav_Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        toolbar.setTitle("Movies");
 
         Movie_Fragment fragment = new Movie_Fragment();
 
@@ -87,6 +90,7 @@ public class Nav_Activity extends AppCompatActivity
         if (id == R.id.movies) {
             // Handle the camera action
 
+            toolbar.setTitle("Movies");
             Movie_Fragment fragment = new Movie_Fragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -102,6 +106,7 @@ public class Nav_Activity extends AppCompatActivity
 
         } else if (id == R.id.tvshows) {
 
+            toolbar.setTitle("TV Shows");
            TVFragment fragment = new TVFragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
