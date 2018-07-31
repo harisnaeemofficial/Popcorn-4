@@ -23,7 +23,7 @@ public class TVPotraitAdapter extends RecyclerView.Adapter<MoviePortraitHolder>{
     Context context;
     FavoriteDao favoriteDao;
 
-    public TVPotraitAdapter(Context context , ArrayList<TV> items, MovieItemClickListener listener) {
+    public TVPotraitAdapter(Context context , ArrayList<TV> items,MovieItemClickListener listener) {
         this.items = items;
         this.listener = listener;
         this.context = context;

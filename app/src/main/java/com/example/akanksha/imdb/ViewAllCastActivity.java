@@ -30,6 +30,7 @@ public class ViewAllCastActivity extends AppCompatActivity {
     RecyclerView recyclerViewCast;
     int id;
     Toolbar toolbar;
+    String cat;
 
 
     @Override
@@ -37,7 +38,7 @@ public class ViewAllCastActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_cast);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -47,6 +48,7 @@ public class ViewAllCastActivity extends AppCompatActivity {
         recyclerViewCast = findViewById(R.id.recycleviewallcast);
         Intent intent = getIntent();
         id = intent.getIntExtra("id",0);
+        cat = intent.getStringExtra("category");
 
         adapter = new AllCastAdapter( casts,this);
 
@@ -67,15 +69,15 @@ public class ViewAllCastActivity extends AppCompatActivity {
 
         Log.d("Fragment","afterset");
 
-        castfetch(id,casts,adapter);
+        castfetch(id,casts,adapter,cat);
 
     }
 
-    void castfetch(int id, final ArrayList<Cast> list, final AllCastAdapter adapter) {
+    void castfetch(int id, final ArrayList<Cast> list, final AllCastAdapter adapter, String cat) {
         Log.d("Fragment", "seefunc");
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/movie/")
+                .baseUrl("https://api.themoviedb.org/3/" + cat + "/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();

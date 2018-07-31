@@ -439,6 +439,7 @@ tools:showIn="@layout/activity_movie_detail">
                 android:textSize="15dp"
                 android:layout_marginStart="15dp"
                 />
+<!--
 
             <TextView
 
@@ -451,6 +452,7 @@ tools:showIn="@layout/activity_movie_detail">
                 android:text="Tagline"
                 android:layout_marginStart="15dp"
                 />
+-->
 
             <TextView
 

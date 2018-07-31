@@ -36,6 +36,7 @@ public class UserReviewsActivity extends AppCompatActivity {
     ReviewAdapter adapter;
     RecyclerView recyclerViewReview;
     int id;
+    String cat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class UserReviewsActivity extends AppCompatActivity {
         recyclerViewReview = findViewById(R.id.recycleviewreviews);
         Intent intent = getIntent();
         id = intent.getIntExtra("id",0);
-
+        cat = intent.getStringExtra("category");
         adapter = new ReviewAdapter( reviews,this);
 
         //Toast.makeText(this,"oncreatefrag", Toast.LENGTH_LONG).show();
@@ -68,7 +69,7 @@ public class UserReviewsActivity extends AppCompatActivity {
 
         Log.d("Fragment","afterset");
 
-       reviewfetch(id,reviews,adapter);
+       reviewfetch(id,reviews,adapter,cat);
 
 
 
@@ -76,11 +77,11 @@ public class UserReviewsActivity extends AppCompatActivity {
 
 
 
-    public  void reviewfetch(int id,final ArrayList<Review> list, final ReviewAdapter adapter)
+    public  void reviewfetch(int id,final ArrayList<Review> list, final ReviewAdapter adapter,String cat)
     {
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/movie/")
+                .baseUrl("https://api.themoviedb.org/3/" + cat + "/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -95,17 +96,19 @@ public class UserReviewsActivity extends AppCompatActivity {
 
                 ReviewRoot root = response.body();
 
-                ArrayList<Review> reviews = root.getResults();
+                if(root != null) {
 
-                list.clear();
-                for (int i = 0; i < reviews.size(); i++) {
+                    ArrayList<Review> reviews = root.getResults();
 
-                    list.add(reviews.get(i));
+                    list.clear();
+                    for (int i = 0; i < reviews.size(); i++) {
 
+                        list.add(reviews.get(i));
+
+                    }
+
+                    adapter.notifyDataSetChanged();
                 }
-
-                adapter.notifyDataSetChanged();
-
 
                 Log.d("Fragment","sucess");
 

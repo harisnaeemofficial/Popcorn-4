@@ -124,7 +124,7 @@ public class TVFragment extends Fragment implements TextView.OnClickListener {
         recyclerView1.setLayoutManager(layoutManager);
 
 
-        Toast.makeText(getContext(),"afterSet", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(),"afterSet", Toast.LENGTH_LONG).show();
         Log.d("Fragment","afterset");
 
         seelandscape("airing_today",shows,adapter1);

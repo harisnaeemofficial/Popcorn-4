@@ -38,7 +38,11 @@
             android:name=".UserReviewsActivity"
             android:label="@string/title_activity_user_reviews"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ViewAllCastActivity" />
+        <activity android:name=".ViewAllCastActivity"
+            android:label="@string/title_activity_user_reviews"
+            android:theme="@style/AppTheme.NoActionBar"
+
+            />
         <activity
             android:name=".WatchListActivity"
             android:label="@string/title_activity_watch_list"

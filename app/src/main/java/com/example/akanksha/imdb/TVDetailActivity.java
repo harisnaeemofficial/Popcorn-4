@@ -31,6 +31,8 @@ import com.example.akanksha.imdb.detailsofmovie.MovieDetails;
 import com.example.akanksha.imdb.detailsofmovie.Production;
 import com.example.akanksha.imdb.detailsofreviews.Review;
 import com.example.akanksha.imdb.detailsofreviews.ReviewRoot;
+import com.example.akanksha.imdb.detailsoftv.GenreTv;
+import com.example.akanksha.imdb.detailsoftv.TVDetails;
 import com.example.akanksha.imdb.detailsofvideo.Result;
 import com.example.akanksha.imdb.detailsofvideo.Video;
 import com.squareup.picasso.Picasso;
@@ -45,7 +47,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static java.sql.Types.NULL;
 
-public class TVDetailActivity extends AppCompatActivity {
+public class TVDetailActivity extends AppCompatActivity implements TextView.OnClickListener{
 
     ImageView landscapeView;
     ImageView posterView;
@@ -89,8 +91,8 @@ public class TVDetailActivity extends AppCompatActivity {
     VideoAdapter adapter2;
     ArrayList<Result> videos = new ArrayList<>();
 
-    MoviePortraitAdapter adapter3;
-    ArrayList<MoviePortrait> movies = new ArrayList<>();
+    TVPotraitAdapter adapter3;
+    ArrayList<TV> shows = new ArrayList<>();
     int id;
 
     LottieAnimationView animationView;
@@ -216,15 +218,11 @@ public class TVDetailActivity extends AppCompatActivity {
 
         recyclerViewMore= (RecyclerView) findViewById(R.id.recycleviewmore);
 
-        adapter3 = new MoviePortraitAdapter(this, movies, new MovieItemClickListener() {
+        adapter3 = new TVPotraitAdapter(this, shows, new MovieItemClickListener() {
             @Override
             public void favButtonClicked(MoviePortrait item, int position) {
 
-                //kh;
-
             }
-
-
         });
 
 
@@ -237,12 +235,12 @@ public class TVDetailActivity extends AppCompatActivity {
         recyclerViewMore.setLayoutManager(layoutManager3);
         Log.d("Fragment","setr2");
 
-        similarfetch(id,movies,adapter3);
+        similarfetch(id,shows,adapter3);
 
 
         storygenreView= findViewById(R.id.storygenre);
         plotView = findViewById(R.id.plot);
-        tagLineView = findViewById(R.id.tag);
+        //tagLineView = findViewById(R.id.tag);
         storylinefetch(id);
 
 
@@ -264,35 +262,35 @@ public class TVDetailActivity extends AppCompatActivity {
 
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/movie/")
+                .baseUrl("https://api.themoviedb.org/3/tv/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
 
         MovieSevice service = retrofit.create(MovieSevice.class);
 
-        Call<MovieDetails> call = service.getMovieDetails(id,"7e00b48b59b417dfc865afa6de61f2aa");
+        Call<TVDetails> call = service.getTVDetails(id,"7e00b48b59b417dfc865afa6de61f2aa");
 
-        call.enqueue(new Callback<MovieDetails>() {
+        call.enqueue(new Callback<TVDetails>() {
             @Override
-            public void onResponse(Call<MovieDetails> call, Response<MovieDetails> response) {
+            public void onResponse(Call<TVDetails> call, Response<TVDetails> response) {
 
-                final MovieDetails details = response.body();
+                final TVDetails details = response.body();
 
 
                 String url = "https://image.tmdb.org/t/p/w500/" + details.getPosterPath();
 
                 Picasso.get().load(url).into(posterView);
 
-                String url1 = "https://image.tmdb.org/t/p/w1280/" + details.getBackdrop_path();
+                String url1 = "https://image.tmdb.org/t/p/w1280/" + details.getBackdropPath();
 
                 Picasso.get().load(url1).into(landscapeView);
 
                 overView.setText(details.getOverview());
                 ratingView.setText(details.getVoteAverage().toString() + "/10");
-                titleView.setText(details.getTitle());
+                titleView.setText(details.getName());
 
-                getSupportActionBar().setTitle(details.getTitle());
+                getSupportActionBar().setTitle(details.getName());
 
                 animationViewLoad.setVisibility(View.GONE);
                 landscapeView.setVisibility(View.VISIBLE);
@@ -300,7 +298,7 @@ public class TVDetailActivity extends AppCompatActivity {
                 animationViewLoad1.setVisibility(View.GONE);
                 posterView.setVisibility(View.VISIBLE);
 
-                ArrayList<Genre> genres = details.getGenres();
+                ArrayList<GenreTv> genres = details.getGenres();
 
 
                 for (int i = 0; i < genres.size(); i++) {
@@ -312,7 +310,7 @@ public class TVDetailActivity extends AppCompatActivity {
                 int watchmov = favoriteDao.getWatchmovid(details.getPosterPath());
 
                 if(mov == NULL) {
-                    fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_border_yellow_600_24dp));
+                    fav.setBackground(TVDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_border_yellow_600_24dp));
                 }
 
                 else {
@@ -324,20 +322,20 @@ public class TVDetailActivity extends AppCompatActivity {
                 }
 
                 if(watchmov == NULL) {
-                    add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_add_circle_outline_yellow_600_24dp));
+                    add.setBackground(TVDetailActivity.this.getResources().getDrawable(R.drawable.ic_add_circle_outline_yellow_600_24dp));
                 }
 
                 else {
 
                     add.setEnabled(false);
-                    add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_add_circle_red_700_24dp));
+                    add.setBackground(TVDetailActivity.this.getResources().getDrawable(R.drawable.ic_add_circle_red_700_24dp));
                 }
 
                 fav.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        FavoriteEntity fmovie= new FavoriteEntity(details.getId(),details.getVoteAverage(),details.getPosterPath(),"Movie");
+                        FavoriteEntity fmovie= new FavoriteEntity(details.getId(),details.getVoteAverage(),details.getPosterPath(),"TVshow");
                         favoriteDao.addFav(fmovie);
 
                         //fav.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
@@ -352,10 +350,10 @@ public class TVDetailActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        WatchEntity wmovie= new WatchEntity(details.getId(),details.getVoteAverage(),details.getPosterPath(),"Movie");
+                        WatchEntity wmovie= new WatchEntity(details.getId(),details.getVoteAverage(),details.getPosterPath(),"TVshow");
                         favoriteDao.addWatch(wmovie);
 
-                        add.setBackground(MovieDetailActivity.this.getResources().getDrawable(R.drawable.ic_add_circle_red_700_24dp));
+                        add.setBackground(TVDetailActivity.this.getResources().getDrawable(R.drawable.ic_add_circle_red_700_24dp));
                         add.setEnabled(false);
 
                     }
@@ -369,7 +367,7 @@ public class TVDetailActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<MovieDetails> call, Throwable t) {
+            public void onFailure(Call<TVDetails> call, Throwable t) {
 
                 Log.d("Fragment",t.getMessage());
             }
@@ -382,7 +380,7 @@ public class TVDetailActivity extends AppCompatActivity {
         Log.d("Fragment", "seefunc");
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/movie/")
+                .baseUrl("https://api.themoviedb.org/3/tv/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -438,7 +436,7 @@ public class TVDetailActivity extends AppCompatActivity {
         Log.d("Fragment", "seefunc");
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/movie/")
+                .baseUrl("https://api.themoviedb.org/3/tv/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -482,32 +480,32 @@ public class TVDetailActivity extends AppCompatActivity {
 
 
 
-    void similarfetch(int id,final ArrayList<MoviePortrait> list,final MoviePortraitAdapter adapter)
+    void similarfetch(int id,final ArrayList<TV> list,final TVPotraitAdapter adapter)
     {
         Log.d("Fragment","seefunc");
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/movie/")
+                .baseUrl("https://api.themoviedb.org/3/tv/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
 
         MovieSevice service = retrofit.create(MovieSevice.class);
 
-        Call<Movie> call = service.getSimilarDetails(id,"7e00b48b59b417dfc865afa6de61f2aa");
+        Call<TVRoot> call = service.getSimilarTVDetails(id,"7e00b48b59b417dfc865afa6de61f2aa");
 
-        call.enqueue(new Callback<Movie>() {
+        call.enqueue(new Callback<TVRoot>() {
             @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
+            public void onResponse(Call<TVRoot> call, Response<TVRoot> response) {
 
-                Movie movie= response.body();
-                ArrayList<MoviePortrait> movies1 = movie.results;
+                TVRoot show= response.body();
+                ArrayList<TV> shows1 = show.results;
                 //ArrayList<Album> courses = a.getData().courses;
 
                 list.clear();
-                for(int i = 0;i<movies1.size();i++){
+                for(int i = 0;i<shows1.size();i++){
 
-                    list.add(movies1.get(i));
+                    list.add(shows1.get(i));
 
 
                 }
@@ -522,7 +520,7 @@ public class TVDetailActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
+            public void onFailure(Call<TVRoot> call, Throwable t) {
 
                 Log.d("Fragment",t.getMessage());
             }
@@ -534,7 +532,7 @@ public class TVDetailActivity extends AppCompatActivity {
     {
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/movie/")
+                .baseUrl("https://api.themoviedb.org/3/tv/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -553,7 +551,7 @@ public class TVDetailActivity extends AppCompatActivity {
 
 
                 plotView.setText(details.getOverview());
-                tagLineView.setText(details.getTagline());
+                //tagLineView.setText(details.getTagline());
 
                 ArrayList<Genre> genres = details.getGenres();
 
@@ -583,7 +581,7 @@ public class TVDetailActivity extends AppCompatActivity {
     {
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/movie/")
+                .baseUrl("https://api.themoviedb.org/3/tv/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -601,21 +599,25 @@ public class TVDetailActivity extends AppCompatActivity {
                 releaseView.setText(details.getRelease_date());
                 durationView.setText(Integer.toString(details.getRuntime()) + " min");
 
-                ArrayList<Production> countries = details.getProduction_countries();
+                //ArrayList<Production> countries = details.getProduction_countries();
 
+/*
 
-                for (int i = 0; i < countries.size(); i++) {
-                    originView.append(countries.get(i).getName() + ",");
+                if(!countries.isEmpty()) {
+                    for (int i = 0; i < countries.size(); i++) {
+                        originView.append(countries.get(i).getName() + ",");
 
+                    }
                 }
+*/
 
-                ArrayList<Language> languages = details.getSpoken_languages();
+               /* ArrayList<Language> languages = details.getSpoken_languages();
 
 
                 for (int i = 0; i < languages.size(); i++) {
                     languageView.append(languages.get(i).getName() + ",");
 
-                }
+                }*/
 
 
 
@@ -637,7 +639,7 @@ public class TVDetailActivity extends AppCompatActivity {
     {
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/movie/")
+                .baseUrl("https://api.themoviedb.org/3/tv/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -706,7 +708,7 @@ public class TVDetailActivity extends AppCompatActivity {
 
 
     @Override
-    public void onClick(View v) {
+   public void onClick(View v) {
 
         int ide = v.getId();
 
@@ -714,6 +716,7 @@ public class TVDetailActivity extends AppCompatActivity {
         {
             Intent intent= new Intent(this,ViewAllCastActivity.class);
             intent.putExtra("id",id);
+            intent.putExtra("category","tv");
             startActivity(intent);
         }
 
@@ -721,6 +724,7 @@ public class TVDetailActivity extends AppCompatActivity {
         {
             Intent intent= new Intent(this,UserReviewsActivity.class);
             intent.putExtra("id",id);
+            intent.putExtra("category","tv");
             startActivity(intent);
 
         }

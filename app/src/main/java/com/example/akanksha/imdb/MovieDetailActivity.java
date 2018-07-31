@@ -715,6 +715,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
         {
             Intent intent= new Intent(this,ViewAllCastActivity.class);
             intent.putExtra("id",id);
+            intent.putExtra("category","movie");
             startActivity(intent);
         }
 
@@ -722,6 +723,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
         {
             Intent intent= new Intent(this,UserReviewsActivity.class);
             intent.putExtra("id",id);
+            intent.putExtra("category","tv");
             startActivity(intent);
 
         }
