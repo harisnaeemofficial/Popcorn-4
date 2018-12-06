@@ -76,7 +76,6 @@ public class UserReviewsActivity extends AppCompatActivity {
     }
 
 
-
     public  void reviewfetch(int id,final ArrayList<Review> list, final ReviewAdapter adapter,String cat)
     {
 

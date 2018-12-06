@@ -110,4 +110,5 @@
     <string name="title_activity_watch_list">WatchListActivity</string>
     <string name="title_activity_cast_detail">CastDetailActivity</string>
     <string name="title_activity_tvdetail">TVDetailActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

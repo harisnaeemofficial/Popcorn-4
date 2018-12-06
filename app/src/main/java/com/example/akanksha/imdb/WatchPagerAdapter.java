@@ -19,7 +19,7 @@ public class WatchPagerAdapter  extends FragmentPagerAdapter{
         }
         else if(position == 1){
 
-            return new WatchMovieFragment();
+            return new WatchTVFragment();
         }
 
         return null;

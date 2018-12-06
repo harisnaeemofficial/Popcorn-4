@@ -68,7 +68,6 @@ public class ReviewAdapter  extends RecyclerView.Adapter<ReviewHolder>{
         }
 
 
-
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

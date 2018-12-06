@@ -109,9 +109,8 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
-       // collapsingToolbarLayout.setCollapsedTitleGravity(0);
 
         Intent intent = getIntent();
         id = intent.getIntExtra("id",0);
@@ -126,17 +125,22 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (scrollRange == -1) {
                     scrollRange = appBarLayout.getTotalScrollRange();
+                    Log.d("lalala","if");
+
+                    collapsingToolbarLayout.setTitleEnabled(false);
 
                 }
                 if (scrollRange + verticalOffset == 0) {
                     isShow = true;
-                    //showOption(R.id.action_info);
-                    getSupportActionBar().setDisplayShowTitleEnabled(true);
+
+                    Log.d("lalala","if 2");
+                    collapsingToolbarLayout.setTitleEnabled(true);
 
                 } else if (isShow) {
                     isShow = false;
-                    //hideOption(R.id.action_info);
-                    getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+                    Log.d("lalala","else if ");
+                    collapsingToolbarLayout.setTitleEnabled(false);
 
 
                 }
@@ -293,7 +297,9 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
                 ratingView.setText(details.getVoteAverage().toString() + "/10");
                 titleView.setText(details.getTitle());
 
-                getSupportActionBar().setTitle(details.getTitle());
+//                getSupportActionBar().setTitle(details.getTitle());
+
+                collapsingToolbarLayout.setTitle(details.getTitle());
 
                 animationViewLoad.setVisibility(View.GONE);
                 landscapeView.setVisibility(View.VISIBLE);
@@ -723,7 +729,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TextView.O
         {
             Intent intent= new Intent(this,UserReviewsActivity.class);
             intent.putExtra("id",id);
-            intent.putExtra("category","tv");
+            intent.putExtra("category","movie");
             startActivity(intent);
 
         }

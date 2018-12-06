@@ -40,17 +40,22 @@ public class ViewAllTVActivity extends AppCompatActivity {
     int currentItems;
     int scrolledItems;
     int totalItems;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_tv);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         Intent intent = getIntent();
         cat = intent.getStringExtra("category") ;
         title = intent.getStringExtra("title") ;
+        toolbar.setTitle(title);
 
         recyclerView = findViewById(R.id.recycleview);
 

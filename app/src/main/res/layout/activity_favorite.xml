@@ -23,6 +23,8 @@
             android:id="@+id/tabLayout"
             app:tabIndicatorColor="@android:color/white"
             android:layout_width="match_parent"
+            app:tabMinWidth="@dimen/app_bar_height"
+            app:tabMode="scrollable"
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TabItem
